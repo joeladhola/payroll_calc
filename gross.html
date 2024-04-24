@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>payroll_calc</title>
+    <link rel="stylesheet" href="gross.css">
+</head>
+<body class="main">
+     <h1> Payroll Calculator</h1><br>
+     <h2>Enter your Basic salary and allowances to calculate your benefits>></h2><br>
+    Enter name:<input type="text" id="n"><br><br>
+    Enter basic salary<input type="text" id="s"><br><br>
+    Enter allowances<input type="text" id="a"><br><br>
+    <button onclick="sal()">Calculate</button><br><br>
+    gross salary<input type="text" id="gs" readonly><br><br>
+    nhif<input type="text" id="nhif" readonly><br><br>
+    nssf<input type="text" id="nssf" readonly><br><br>
+    nhdf<input type="text" id="nhdf" readonly><br><br>
+    taxable income<input type="text" id="ti" readonly><br><br>
+    pay<input type="text" id="pay" readonly><br><br>
+    netpay<input type="text" id="net" readonly><br><br>
+    <button onclick="prt()">Print</button>
+    
+    <script>
+        function sal()
+        {
+            var basic,a,gs,nhif,nssf,nhdf,ti,paye,rel,pay,net;
+            basic=document.getElementById("s").value;
+            a=document.getElementById("a").value;
+            gs=parseInt(basic)+parseInt(a); 
+            if (gs >0 && gs<= 5999){  
+                nhif = 150;}
+            else if (gs > 6000 && gs <= 7999){
+               nhif = 300}
+            else if (gs > 8000 && gs <=11999){
+               nhif = 400}
+            else if (gs > 12000 && gs <=14999){
+               nhif = 500
+            }
+            else if (gs > 15000 && gs <=19999){
+               nhif = 600
+            }
+            else if (gs > 20000 && gs <= 24999){
+               nhif = 750
+            }
+            else if (gs > 25000 && gs <= 29999){
+               nhif = 850
+            }
+            else if (gs > 30000 && gs <= 34999){
+               nhif = 900
+            }
+            else if (gs > 35000 && gs <=39999){
+               nhif = 950
+            }
+            else if (gs > 40000 && gs <=44999){
+               nhif = 1000
+            }
+            else if (gs > 45000 && gs <= 49999){
+               nhif = 1100
+            }
+            else if (gs > 50000 && gs <= 59999 ){
+               nhif = 1200
+            }
+            else if (gs > 60000 && gs <= 69999){
+               nhif = 1300
+            }
+            else if ( gs > 70000 && gs <= 79999){
+               nhif = 1400
+            }
+            else if ( gs > 80000 && gs <= 89999){
+               nhif = 1500
+            }
+            else if ( gs > 90000 && gs <= 99999){
+               nhif = 1600
+            }
+            else{
+               nhif = 1700
+            }
+
+            if (gs <= 18000){
+               nssf = gs * 0.06
+            }
+            else{
+               nssf = 18000 * 0.06
+            }
+
+            nhdf = gs * 0.015
+
+            ti = gs - (nssf + nhdf)
+
+            if (ti>=0 && ti <= 24000){
+               paye = 0
+            }
+            else if ( ti > 24000 && ti <= 32333){
+               paye = (0.1 * ti) + ((ti - 24000) * 0.25)
+            }
+            else if ( ti > 32333 && ti <= 500000){
+               paye = (0.1 * ti) + (8333 * 0.25) + (0.3 * (ti - 32333))
+            }
+            else if ( ti > 500000 && ti <= 800000){
+               paye = (0.1 * ti) + (8333 * 0.25) + (0.3 * 467667) + ((ti - 500000) * 0.325)
+            }
+            else {
+               paye = (0.1 * ti) +(8333 *0.25 ) + (0.3 * 467667) +  (300000 * 0.325) + ((ti - 800000) * 0.35)
+            }
+
+            rel = 2400
+
+            pay = paye - rel
+
+            net = gs - (nhif + nhdf + nssf + paye)
+
+            
+            document.getElementById('gs').value=gs;
+            document.getElementById('nhif').value=nhif;
+            document.getElementById('nssf').value=nssf;
+            document.getElementById('nhdf').value=nhdf;
+            document.getElementById('ti').value=ti;
+            document.getElementById('pay').value=pay;
+            document.getElementById('net').value=net;
+
+
+
+ 	 
+
+          //   var basic,ta,da,hra,net;
+          //   basic=document.getElementById("s").value;
+          //   ta=basic*15/100;
+          //   da=basic*50/100;
+          //   hra=basic*50/100;
+          //   pf=basic*8/100;
+          //   net=parseInt(basic)+parseInt(ta)+parseInt(da)+parseInt(hra)-parseInt(pf);
+          //   document.getElementById('ta').value=ta;
+          //   document.getElementById('da').value=da;
+          //   document.getElementById('hra').value=hra;
+          //   document.getElementById('pf').value=pf;
+          //   document.getElementById('net').value=net;
+        }
+        function prt()
+        {
+            window.print();
+        }
+        // var basic_salary=prompt("Enter your basic salary");
+        // var house_allowance=prompt("Enter your house allowance");
+        // var medical_allowance=prompt("Enter your medical allowance");
+        // var gross_salary = parseInt(basic_salary) + parseInt(house_allowance) + parseInt(medical_allowance);
+        // var tax = gross_salary * 0.2;
+        // var net_income = gross_salary - tax;
+        // document.write("<br>Your Gross pay is ", gross_salary);
+        // document.write("<br> Your net income is", net_income);
+        // document.write("<br> Tax Deducted on Gross pay was ", tax);
+    </script>
+</body>
+</html>
